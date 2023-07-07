@@ -34,4 +34,4 @@ order8 = Order("8", "135 Walnut St.", 80, "garply@example.com")
 order9 = Order("9", "864 Spruce Ave.", 125, "waldo@example.com")
 order10 = Order("10", "279 Oak St.", 90, "fred@example.com")
 
-print(order1.get_all())
+#print(order1.get_all())

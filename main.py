@@ -1,3 +1,4 @@
+import urllib
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from routes import ROUTES
 
@@ -13,27 +14,6 @@ class MyServer(BaseHTTPRequestHandler):
 
 
 
-    def do_GET2(self):
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-
-        self.wfile.write(bytes("<html><head><title>boo</title></head>", "utf-8"))
-        self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
-        self.wfile.write(bytes("<body>", "utf-8"))
-
-        print(self.path)
-
-        if self.path in self.routes:
-            handler = self.routes[self.path]
-            page_content = handler()
-        else:
-            #self.path = 404
-            #handler = self.routes[self.path]
-            page_content = self.routes[404]()
-
-        self.wfile.write(bytes(page_content, "utf-8"))
-        self.wfile.write(bytes("</body></html>", "utf-8"))
 
     def do_GET(self):
         self.send_response(200)
@@ -54,8 +34,7 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(bytes("<html><head><title>boo</title></head>", "utf-8"))
             self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
             self.wfile.write(bytes("<body>", "utf-8"))
-
-            self.wfile.write(bytes(page_content, "utf-8"))
+            self.wfile.write(bytes(page_content, "utf-8"))    # page content was created by handler() / self.routes
             self.wfile.write(bytes("</body></html>", "utf-8"))
         else:
             self.wfile.write(bytes(page_content, "utf-8"))
@@ -66,13 +45,12 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_response(301)
             self.send_header('Content-Type', 'text/html')
             self.end_headers()
-
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
-            print(post_data)
-
+            decoded_message = urllib.parse.unquote(post_data)
+            print("Получили с клиента вот такое: \n", decoded_message, "\n")
         except:
-            self.send_error(404, "{}".format("hren znaet chto"))
+            self.send_error(404, "{}".format("hren-znaet-chto exception"))
             # print(sys.exc_info())
 
 
