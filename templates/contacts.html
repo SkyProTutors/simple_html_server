@@ -86,18 +86,18 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-6">
                             <h2 class="text-center">Форма обратной связи</h2>
-                            <form>
+                            <form action="/contacts" method="post">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Имя</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Введите имя">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Введите имя">
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Введите email">
+                                    <input type="email" name="email" class="form-control" id="email" placeholder="Введите email">
                                 </div>
                                 <div class="mb-3">
                                     <label for="message" class="form-label">Сообщение</label>
-                                    <textarea class="form-control" id="message" rows="5" placeholder="Введите сообщение"></textarea>
+                                    <textarea name="text_message" class="form-control" id="message" rows="5" placeholder="Введите сообщение"></textarea>
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">Отправить</button>

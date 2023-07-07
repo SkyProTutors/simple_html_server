@@ -61,6 +61,21 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(bytes(page_content, "utf-8"))
 
 
+    def do_POST(self):
+        try:
+            self.send_response(301)
+            self.send_header('Content-Type', 'text/html')
+            self.end_headers()
+
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            print(post_data)
+
+        except:
+            self.send_error(404, "{}".format("hren znaet chto"))
+            # print(sys.exc_info())
+
+
 if __name__ == '__main__':
 
 
