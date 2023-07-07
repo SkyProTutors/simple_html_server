@@ -1,10 +1,16 @@
-from pages import PC
+from unicodedata import category
+
+from controller import PageController
 
 ROUTES = {
-    '/': PC.index,
-    '/hello': PC.hello,
-    '/error': PC.error,
-    '/top' : PC.top,
-    '/example': PC.example,
-    404: PC.error2
+    '/': PageController.main_page,
+    '/hello': PageController.hello,
+    '/error': PageController.error,
+    '/top': PageController.top,
+    '/example': PageController.example,
+    '/main': PageController.main_page,
+    '/contacts': PageController.contacts,
+    '/category': PageController.category,
+    '/catalog': PageController.catalog,
+    404: PageController.error2
 }

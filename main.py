@@ -13,7 +13,7 @@ class MyServer(BaseHTTPRequestHandler):
 
 
 
-    def do_GET(self):
+    def do_GET2(self):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
@@ -34,6 +34,31 @@ class MyServer(BaseHTTPRequestHandler):
 
         self.wfile.write(bytes(page_content, "utf-8"))
         self.wfile.write(bytes("</body></html>", "utf-8"))
+
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+
+        print(self.path)
+        if self.path in self.routes:
+            handler = self.routes[self.path]
+            page_content = handler()
+        else:
+            #self.path = 404
+            #handler = self.routes[self.path]
+            self.path = "/error"
+            page_content = self.routes[404]()
+
+        if self.path in ("/error", "/top", "/hello"):
+            self.wfile.write(bytes("<html><head><title>boo</title></head>", "utf-8"))
+            self.wfile.write(bytes("<p>Request: %s</p>" % self.path, "utf-8"))
+            self.wfile.write(bytes("<body>", "utf-8"))
+
+            self.wfile.write(bytes(page_content, "utf-8"))
+            self.wfile.write(bytes("</body></html>", "utf-8"))
+        else:
+            self.wfile.write(bytes(page_content, "utf-8"))
 
 
 if __name__ == '__main__':

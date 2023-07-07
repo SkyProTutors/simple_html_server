@@ -5,7 +5,7 @@ class PagesView:
 
     @staticmethod
     def read_file(filename):
-        with open(filename, 'r') as f:
+        with open(filename, 'r', encoding='utf-8') as f:
             text = f.read()
         return text
 
@@ -39,10 +39,30 @@ class PagesView:
 
     @staticmethod
     def error2():
-        res = PagesView.render('templates/uni.html', info="FAIL", pic="")
+        res = PagesView.render('templates/uni.html', info="This page does not exist", pic="")
+        return res
+
+    @staticmethod
+    def main_page():
+        res = PagesView.render('templates/main.html', info="MAIN", pic="")
         return res
 
     @staticmethod
     def example():
-        res = PagesView.render('templates/example.html', info="FAIL", pic="")
+        res = PagesView.render('templates/example.html', info="EXAMPLE", pic="")
+        return res
+
+    @staticmethod
+    def catalog():
+        res = PagesView.render('templates/catalog.html', info="CATALOG", pic="")
+        return res
+
+    @staticmethod
+    def category():
+        res = PagesView.render('templates/category.html', info="CATEGORY", pic="")
+        return res
+
+    @staticmethod
+    def contacts():
+        res = PagesView.render('templates/contacts.html', info="CONTACTS", pic="")
         return res
