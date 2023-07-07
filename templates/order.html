@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for order in orders_top %}
+    <p>{{ order.number }}</p>
+    <p>{{ order.amount }}</p>
+    <p>{{ order.email }}</p>
+    {% endfor %}
+</body>
+</html>
